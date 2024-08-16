@@ -8,12 +8,12 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import { Add_cart } from "../Redux/Action/cartAction";
 
-const Products = ({navigation}) => {
+const Products = ({ navigation }) => {
   const [viewModal, setViewModal] = useState(false);
   const [product, setProduct] = useState([]);
   const [showProducts, setShowProducts] = useState(null);
   const dispatch = useDispatch();
-//   const navigation = useNavigation();
+  //   const navigation = useNavigation();
 
   useEffect(() => {
     axios
@@ -39,7 +39,11 @@ const Products = ({navigation}) => {
   return (
     <>
       <View style={styles.mainContainer}>
-        <View><TouchableOpacity onPress={()=>navigation.navigate('CartItems')}><Text>View Cart</Text></TouchableOpacity></View>
+        <View>
+          <TouchableOpacity onPress={() => navigation.navigate("CartItems")}>
+            <Text>View Cart</Text>
+          </TouchableOpacity>
+        </View>
         <FlatList
           data={product}
           keyExtractor={(item) => item.id.toString()}
@@ -53,7 +57,10 @@ const Products = ({navigation}) => {
                 <Text style={styles.productTitle}>{item.title}</Text>
                 <Text style={styles.productPrice}>${item.price}</Text>
               </View>
-              <TouchableOpacity style={styles.readButton} onPress={() => handleProductView(item)}>
+              <TouchableOpacity
+                style={styles.readButton}
+                onPress={() => handleProductView(item)}
+              >
                 <Text style={styles.readButtonText}>View Details</Text>
               </TouchableOpacity>
             </TouchableOpacity>
